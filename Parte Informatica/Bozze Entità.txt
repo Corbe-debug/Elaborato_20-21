@@ -1,0 +1,13 @@
+ENTITA'
+
+Cliente (* idC, Nome, Cognome, email, psw, stelle)
+
+LogVestito (* idV, Descrizione, Marca, Taglia, Colore, Valutazione, idC)
+
+Disponibile (* idD, idV)
+
+Comprato (* idC, idV)
+
+Benificenza (* idB, idV)
+
+Log (* idL, descrizione, idC)
