@@ -1,13 +1,22 @@
 ENTITA'
 
-Cliente (* idC, Nome, Cognome, email, psw, stelle)
+Cliente (* idC, Nome, Cognome, Indirizzo, Email, PSW, Stelle)
 
-LogVestito (* idV, Descrizione, Marca, Taglia, Colore, Valutazione, idC)
+Vestito (* idV, Descrizione, Marca, Taglia, Colore, Valutazione, idC)
 
-Disponibile (* idD, idV)
+Disponibile (* idV, Data, idV)
 
-Comprato (* idC, idV)
+Acquisto (* idV, Data, idV, idC)
 
-Benificenza (* idB, idV)
+Log (* idL, Descrizione, Data, idC)
 
-Log (* idL, descrizione, idC)
+------------------------------------------------------------------------------------
+
+ASSOCIAZIONI
+
+Cliente con Vestito (Dona con attributo DataDonazione)
+
+Vestito con Disponibile e Acquisto (E' -> Associazione ISA, Sostituzione dell’ISA con 2 associazioni 1:1 più vincoli referenziali)
+
+Cliente con Log (Crea)
+
