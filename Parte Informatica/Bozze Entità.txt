@@ -14,11 +14,11 @@ Log (* idL, Descrizione, Data, _idC_)
 
 ASSOCIAZIONI
 
-Cliente con Vestito (Dona con attributo DataDonazione -> 1:N)
+Cliente con Vestito (Donare con attributo DataDonazione -> 1:N)
 
 Vestito con TipoIndumento (Fa parte -> N:1)
 
-Vestito con Valutazione (Valutato -> N:1)
+Vestito con Valutazione (Valutare -> N:1)
 
-Cliente con Log (Crea -> 1:N)
+Cliente con Log (Creare -> 1:N)
 
