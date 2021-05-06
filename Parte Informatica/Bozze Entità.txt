@@ -2,17 +2,23 @@ ENTITA'
 
 Cliente (* idC, Nome, Cognome, Indirizzo, Email, PSW, Stelle)
 
-Vestito (* idV, Descrizione, Marca, Taglia, Colore, Valutazione, Disponibile)
+Vestito (* idV, Marca, Taglia, Colore, Descrizione, Disponibile, _idC_, _idT_, _idVa_)
 
-Log (* idL, Descrizione, Data, idC)
+TipoIndumento (* idT, Nome)
+
+Valutazione (* idVa, Descrizione)
+
+Log (* idL, Descrizione, Data, _idC_)
 
 ------------------------------------------------------------------------------------
 
 ASSOCIAZIONI
 
-Cliente con Vestito (Dona con attributo Data -> N:N)
+Cliente con Vestito (Dona con attributo DataDonazione -> 1:N)
 
-Cliente con Vestito (Acquisto con attributo Data -> N:N)
+Vestito con TipoIndumento (Fa parte -> N:1)
+
+Vestito con Valutazione (Valutato -> N:1)
 
 Cliente con Log (Crea -> 1:N)
 
