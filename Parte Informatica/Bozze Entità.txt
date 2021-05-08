@@ -1,6 +1,6 @@
 ENTITA'
 
-Cliente (* idC, Nome, Cognome, Indirizzo, Email, PSW, Stelle)
+Cliente (* idC, Nome, Cognome, DataNascita, Indirizzo, Email, PSW, Stelle)
 
 Vestito (* idV, Tipo, Marca, Taglia, Colore, Descrizione, Valutazione, Disponibile, _idC_)
 
