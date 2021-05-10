@@ -1,0 +1,18 @@
+ENTITA'
+
+Cliente (* idC, Nome, Cognome, DataNascita, Indirizzo, Email, PSW, Stelle)
+
+Vestito (* idV, Tipo, Marca, Taglia, Colore, Descrizione, Valutazione, Disponibile, PathImmagine, _idC_)
+
+Log (* idL, Descrizione, Data, _idC_)
+
+Admin (* idA, Email, PSW)
+
+------------------------------------------------------------------------------------
+
+ASSOCIAZIONI
+
+Cliente con Vestito (Donare con attributo DataDonazione -> 1:N)
+
+Cliente con Log (Creare -> 1:N)
+
