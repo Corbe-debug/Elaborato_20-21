@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE HTML>
 <html>
 
@@ -15,17 +19,21 @@
         <nav class="nav"> <a class="logo" href="#"> <img src="img/logo.png" alt="logo"> </a>
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">Portfolio</a></li>
                 <li><a href="#">About me</a></li>
                 <li><a href="#">Contact</a></li>
+                <?php
+
+                if (isset($_SESSION["loginA"])) {
+                    echo ('<li><a href="#">Log</a></li>');
+                } ?>
             </ul>
             <div class="login">
-                <form action="includes/login.inc.php" method="post">
-                    <input type="text" name="mailuid" placeholder="Username or Email...">
-                    <input type="password" name="pwd" placeholder="Password...">
+                <form action="validator/login.inc.php" method="POST">
+                    <input type="text" name="email" placeholder="Email">
+                    <input type="password" name="psw" placeholder="Password">
                     <button type="submit" name="login-submit">Login</button>
                 </form>
-                <a href="signup.php">Signup</a>
+                <a href="signup.php">Registrati</a>
                 <form action="includes/logout.inc.php" method="post">
                     <button type="submit" name="logout-submit">Logout</button>
                 </form>
@@ -61,6 +69,36 @@
             </div>
         </div>
     </center>
+
+
+    <?php
+    //Output errori
+    if (isset($_GET['error'])) {
+        switch ($_GET['error']) {
+            case 1:
+                echo "<script>alert('Campi incompleti')</script>";
+                break;
+            case 2:
+                echo "<script>alert('Email non valida')</script>";
+                break;
+            case 3:
+                echo "<script>alert('Password sbagliata')</script>";
+                break;
+            case 4:
+                echo "<script>alert('Email non trovata')</script>";
+                break;
+        }
+    } else if (isset($_GET['ok'])) {
+        switch ($_GET['ok']) {
+            case 1:
+                echo "<script>alert('Loggato corettamente')</script>";
+                break;
+        }
+    }
+
+    if (isset($_SESSION["loginA"])) {
+    }
+    ?>
 </body>
 
 </html>
