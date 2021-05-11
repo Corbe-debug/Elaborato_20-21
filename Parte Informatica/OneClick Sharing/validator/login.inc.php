@@ -1,9 +1,8 @@
 <?php
 session_start();
-include 'connection.php';
-
 //Verifico il submit dal login
 if (isset($_POST['login-submit'])) {
+    include 'connection.php';
 
     //Prendo i valori di email e password e li controllo
     $email = $_POST["email"];
@@ -32,13 +31,15 @@ if (isset($_POST['login-submit'])) {
                 //Controllo se la password è corretta
                 if ($row['PSW'] == md5($psw)) {
                     //Login effettuata
-                    header("Location: ../index.php?ok=1");
+
+                    //Imposto le sessioni per il login, nome e email
                     $_SESSION['loginC'] = true;
-                    break;
+                    $_SESSION['Nome'] = $row['Nome'];
+                    header("Location: ../index.php");
+
                 } else {
                     //Password sbagliata
                     header("Location: ../index.php?error=3");
-                    break;
                 }
             }
         } else {

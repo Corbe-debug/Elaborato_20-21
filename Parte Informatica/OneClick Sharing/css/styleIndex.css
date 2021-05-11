@@ -65,3 +65,7 @@ ul {
     padding: 5px;
     size: 50px;
 }
+
+.welcomeText {
+    font-family: 'Open Sans', sans-serif;
+}

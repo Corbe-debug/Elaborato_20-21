@@ -6,11 +6,12 @@ session_start();
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/styleIndex.css" />
+    <script src="js/script.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OneClick Sharing</title>
-    <link rel="shortcut icon" type="image/jpg" href="img/logo.ico" />
+    <link rel="shortcut icon" type="image/jpg" href="img/logo.ico"/>
 </head>
 
 <body>
@@ -34,7 +35,7 @@ session_start();
                     <button type="submit" name="login-submit">Login</button>
                 </form>
                 <a href="signup.php">Registrati</a>
-                <form action="includes/logout.inc.php" method="post">
+                <form action="validator/logout.inc.php" method="post">
                     <button type="submit" name="logout-submit">Logout</button>
                 </form>
             </div>
@@ -44,8 +45,19 @@ session_start();
 
     <!----------Schermata di benevenuto con foto vestiti presenti------>
     <center>
-        <h2 class="welcomeText">Benvenuto su OneClick Sharing</h2>
-        <h3 class="welcomeText">Accedi o visualizza alcuni degli indumenti disponibili</h3>
+
+        <?php
+        if (isset($_SESSION["loginA"])) {
+            echo ("<h2 class='welcomeText'>Bentornato admin</h2>");
+            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti o i log degli utenti</h3>");
+        } else if (isset($_SESSION["loginC"])) {
+            echo ("<h2 class='welcomeText'>Benvenuto $_SESSION[Nome]</h2>");
+            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti, compra o dona un vestito</h3>");
+        } else {
+            echo ("<h2 class='welcomeText'>Benvenuto su OneClick Sharing</h2>");
+            echo ("<h3 class='welcomeText'>Accedi o visualizza alcuni degli indumenti disponibili</h3>");
+        }
+        ?>
 
         <!-- Gallery -->
         <div class="row">
@@ -91,12 +103,9 @@ session_start();
     } else if (isset($_GET['ok'])) {
         switch ($_GET['ok']) {
             case 1:
-                echo "<script>alert('Loggato corettamente')</script>";
+                echo "<script>alert('')</script>";
                 break;
         }
-    }
-
-    if (isset($_SESSION["loginA"])) {
     }
     ?>
 </body>
