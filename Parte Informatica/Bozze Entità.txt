@@ -2,9 +2,9 @@ ENTITA'
 
 Cliente (* idC, Nome, Cognome, DataNascita, Indirizzo, Email, PSW, Stelle)
 
-Vestito (* idV, Tipo, Marca, Taglia, Colore, Descrizione, Valutazione, Disponibile, PathImmagine, _idC_)
+Vestito (* idV, Tipo, Marca, Taglia, Colore, Descrizione, Valutazione, PathImmagine, DataDonazione, Disponibile, DataAcquisto, _idC1_, _idC2_)
 
-Log (* idL, Descrizione, Data, _idC_)
+Log (* idL, Descrizione, Data, _idC1_)
 
 Admin (* idA, Email, PSW)
 
@@ -16,3 +16,4 @@ Cliente con Vestito (Donare con attributo DataDonazione -> 1:N)
 
 Cliente con Log (Creare -> 1:N)
 
+Cliente con Vestito (Acquistare con attributo DataDonazione -> 1:N)
