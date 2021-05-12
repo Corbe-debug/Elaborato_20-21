@@ -16,7 +16,7 @@
     <style>
         body {
             color: #fff;
-            background: #19aa8d;
+            background: #579558;
             font-family: 'Roboto', sans-serif;
         }
 
@@ -83,14 +83,14 @@
         .signup-form .btn:active {
             font-size: 16px;
             font-weight: bold;
-            background: #19aa8d !important;
+            background: #579558 !important;
             border: none;
             min-width: 140px;
         }
 
         .signup-form .btn:hover,
         .signup-form .btn:focus {
-            background: #179b81 !important;
+            background: #579558 !important;
         }
 
         .signup-form a {
@@ -103,7 +103,7 @@
         }
 
         .signup-form form a {
-            color: #19aa8d;
+            color: #579558;
             text-decoration: none;
         }
 

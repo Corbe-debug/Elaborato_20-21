@@ -10,14 +10,101 @@ session_start();
     <script src="js/script.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
     <title>OneClick Sharing</title>
-    <link rel="shortcut icon" type="image/jpg" href="img/logo.ico"/>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana, sans-serif;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Caption text */
+        .text {
+            color: black;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .text {
+                font-size: 11px
+            }
+        }
+    </style>
+
 </head>
 
-<body>
+<body onload="showSlides()" style="background-color:#deeade">
     <!----------Header con link per login e signup------>
     <header>
-        <nav class="nav"> <a class="logo" href="#"> <img src="img/logo.png" alt="logo"> </a>
+        <nav class="nav"> <a class="logo" href="#"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="#">About me</a></li>
@@ -43,45 +130,45 @@ session_start();
     </header>
 
 
-    <!----------Schermata di benevenuto con foto vestiti presenti------>
+    <!----------Schermata di benevenuto con alcune foto dei vestiti presenti------>
     <center>
+        <br>
 
         <?php
         if (isset($_SESSION["loginA"])) {
-            echo ("<h2 class='welcomeText'>Bentornato admin</h2>");
-            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti o i log degli utenti</h3>");
+            echo ("<h1 class='welcomeText'>Bentornato admin</h1>");
+            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti oppure i log degli utenti</h3>");
         } else if (isset($_SESSION["loginC"])) {
-            echo ("<h2 class='welcomeText'>Benvenuto $_SESSION[Nome]</h2>");
-            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti, compra o dona un vestito</h3>");
+            echo ("<h1 class='welcomeText'>Benvenuto $_SESSION[Nome]</h1>");
+            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti, compra oppure dona un vestito</h3>");
         } else {
-            echo ("<h2 class='welcomeText'>Benvenuto su OneClick Sharing</h2>");
-            echo ("<h3 class='welcomeText'>Accedi o visualizza alcuni degli indumenti disponibili</h3>");
+            echo ("<h1 class='welcomeText'>Benvenuto su OneClick Sharing</h1>");
+            echo ("<h3 class='welcomeText'>Accedi oppure visualizza alcuni degli indumenti disponibili</h3>");
         }
         ?>
 
-        <!-- Gallery -->
-        <div class="row">
-            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                ciao
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg" class="w-100 shadow-1-strong rounded mb-4" alt="CIAAAAAAAAAAA" />
 
-                <img src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
+        <!---Slider--->
+        <br><br>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="img/logo.png" style="width:auto">
+                <br><br><br><br>
+                <div class="text">Foto1</div>
             </div>
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <img src="https://mdbootstrap.com/img/Photos/Vertical/mountain2.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
-
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
-            </div>
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
-
-                <img src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
+            <div class="mySlides fade">
+                <img src="img/logo_small_icon_only_inverted.png" style="width:auto">
+                <br><br><br><br>
+                <div class="text">Foto2</div>
             </div>
         </div>
-    </center>
+        <br>
 
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </center>
 
     <?php
     //Output errori
@@ -103,7 +190,7 @@ session_start();
     } else if (isset($_GET['ok'])) {
         switch ($_GET['ok']) {
             case 1:
-                echo "<script>alert('')</script>";
+                //echo "<script>alert('')</script>";
                 break;
         }
     }

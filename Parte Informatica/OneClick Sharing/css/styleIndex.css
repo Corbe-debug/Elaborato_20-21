@@ -18,8 +18,8 @@ ul {
 }
 
 .nav {
-    background-color: white;
-    color: rgba(6, 176, 133, 255);
+    background-color: #dfebdf;
+    color: #579558;
     padding-top: 1em;
     display: flex;
     flex-wrap: wrap;
@@ -39,7 +39,7 @@ ul {
 
 .login button {
     -webkit-appearance: none;
-    background: rgba(6, 176, 133, 255);
+    background: #579558;
     color: #fff;
     padding: 5px 10px;
     border-radius: 10px;
@@ -67,5 +67,6 @@ ul {
 }
 
 .welcomeText {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Cursive';
+    color: #579558;
 }
