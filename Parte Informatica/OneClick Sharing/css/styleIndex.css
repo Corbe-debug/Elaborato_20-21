@@ -11,15 +11,16 @@ ul {
     margin: 1em 0 1em 1em;
 }
 
+/*Font per titoletti difianco al logo*/
 .nav ul a {
-    color: #999;
+    color: #8c8c8c;
     text-decoration: none;
     margin-left: 15px;
 }
 
+/*Font per l'header del sito*/
 .nav {
     background-color: #dfebdf;
-    color: #579558;
     padding-top: 1em;
     display: flex;
     flex-wrap: wrap;
@@ -37,13 +38,26 @@ ul {
     margin-left: 20px;
 }
 
+/*Font per i pulsanti login e logout*/
 .login button {
     -webkit-appearance: none;
     background: #579558;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 10px;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
     border: none;
+    font-family: "Raleway", sans-serif;
+}
+
+/*Font per pulsante registrati*/
+#btnRegistrati{
+    -webkit-appearance: none;
+    background: #579558;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;  
+    font-family: "Raleway", sans-serif;
 }
 
 .login form {
@@ -59,14 +73,16 @@ ul {
 }
 
 .login input {
-    background: #eee;
+    background: #dfebdf;
     color: #333;
-    border: none;
-    padding: 5px;
+    border: 1px solid;
+    padding: 10px;
     size: 50px;
+    font-size:15px;
+
 }
 
 .welcomeText {
-    font-family: 'Cursive';
-    color: #579558;
+    font-size: 25px;
+    color: black;
 }

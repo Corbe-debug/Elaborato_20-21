@@ -9,6 +9,7 @@ session_start();
     <link rel="stylesheet" href="css/styleIndex.css" />
     <script src="js/script.js"></script>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
     <title>OneClick Sharing</title>
@@ -18,8 +19,14 @@ session_start();
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Verdana, sans-serif;
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif;
         }
 
         .mySlides {
@@ -60,7 +67,7 @@ session_start();
         }
 
         .active {
-            background-color: #717171;
+            background-color: white;
         }
 
         /* Fading animation */
@@ -69,6 +76,12 @@ session_start();
             -webkit-animation-duration: 1.5s;
             animation-name: fade;
             animation-duration: 1.5s;
+        }
+
+        .imgSlider {
+            border: 1px solid;
+            padding: 10px;
+            box-shadow: 15px 15px 15px #deeade;
         }
 
         @-webkit-keyframes fade {
@@ -101,19 +114,21 @@ session_start();
 
 </head>
 
-<body onload="showSlides()" style="background-color:#deeade">
+<body onload="showSlides()" style="background-color:#dfebdf">
     <!----------Header con link per login e signup------>
     <header>
-        <nav class="nav"> <a class="logo" href="#"> <img src="img/logo_small.png" alt="logo"> </a>
+        <nav class="nav"> <a class="logo" href="index.php"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">About me</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">Come funziona?</a></li>
+                <li><a href="#">Visualizza i vestiti</a></li>
                 <?php
-
                 if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="#">Log</a></li>');
-                } ?>
+                    echo ('<li><a href="#">Log utenti</a></li>');
+                } else if (isset($_SESSION["loginC"])) {
+                    echo ('<li><a href="#">Dona un vestito</a></li>');
+                } 
+                ?>
+
             </ul>
             <div class="login">
                 <form action="validator/login.inc.php" method="POST">
@@ -121,7 +136,9 @@ session_start();
                     <input type="password" name="psw" placeholder="Password">
                     <button type="submit" name="login-submit">Login</button>
                 </form>
-                <a href="signup.php">Registrati</a>
+                <form action="signup.php">
+                    <input id="btnRegistrati" type="submit" value="Registrati" />
+                </form>
                 <form action="validator/logout.inc.php" method="post">
                     <button type="submit" name="logout-submit">Logout</button>
                 </form>
@@ -137,13 +154,13 @@ session_start();
         <?php
         if (isset($_SESSION["loginA"])) {
             echo ("<h1 class='welcomeText'>Bentornato admin</h1>");
-            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti oppure i log degli utenti</h3>");
+            echo ("<p class='welcomeText'>Visualizza i vestiti presenti oppure i log degli utenti</p>");
         } else if (isset($_SESSION["loginC"])) {
             echo ("<h1 class='welcomeText'>Benvenuto $_SESSION[Nome]</h1>");
-            echo ("<h3 class='welcomeText'>Visualizza i vestiti presenti, compra oppure dona un vestito</h3>");
+            echo ("<p class='welcomeText'>Visualizza i vestiti presenti, compra oppure dona un vestito</p>");
         } else {
             echo ("<h1 class='welcomeText'>Benvenuto su OneClick Sharing</h1>");
-            echo ("<h3 class='welcomeText'>Accedi oppure visualizza alcuni degli indumenti disponibili</h3>");
+            echo ("<p class='welcomeText'>Accedi oppure visualizza alcuni degli indumenti disponibili</p>");
         }
         ?>
 
@@ -152,12 +169,12 @@ session_start();
         <br><br>
         <div class="slideshow-container">
             <div class="mySlides fade">
-                <img src="img/logo.png" style="width:auto">
+                <img src="img/logo.png" class="imgSlider" width="512" height="512">
                 <br><br><br><br>
                 <div class="text">Foto1</div>
             </div>
             <div class="mySlides fade">
-                <img src="img/logo_small_icon_only_inverted.png" style="width:auto">
+                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512">
                 <br><br><br><br>
                 <div class="text">Foto2</div>
             </div>
@@ -185,12 +202,6 @@ session_start();
                 break;
             case 4:
                 echo "<script>alert('Email non trovata')</script>";
-                break;
-        }
-    } else if (isset($_GET['ok'])) {
-        switch ($_GET['ok']) {
-            case 1:
-                //echo "<script>alert('')</script>";
                 break;
         }
     }
