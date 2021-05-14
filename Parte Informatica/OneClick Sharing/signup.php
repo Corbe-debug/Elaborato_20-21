@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,14 +123,6 @@
         .signup-form .fa-paper-plane {
             font-size: 18px;
         }
-
-        .signup-form .fa-check {
-            color: #fff;
-            left: 17px;
-            top: 18px;
-            font-size: 7px;
-            position: absolute;
-        }
     </style>
 </head>
 
@@ -212,11 +209,27 @@
                     <input type="password" class="form-control" id="ConfirmPSW" name="ConfirmPSW" placeholder="Confirm Password" required="required">
                 </div>
             </div>
-            <div class="form-group">
+            <?php
+            if (!isset($_SESSION["registrato"])) {
+                echo ('<div class="form-group">
                 <button type="submit" name="login-signup" class="btn btn-primary btn-lg">Registrati</button>
-            </div>
+                </div>');
+            } else {
+                echo ('<div class="form-group">
+                <button type="submit" name="login-signup" class="btn btn-primary btn-lg">Registra un altro utente</button>
+                </div>');
+            }
+            ?>
         </form>
-        <div class="text-center">Hai già un account? <a href="index.php">Log in</a></div>
+
+        <?php
+        if (!isset($_SESSION["registrato"])) {
+            echo ('<div class="text-center">Hai già un account? <a href="index.php">Log in</a></div>');
+        } else {
+            echo ('<div class="text-center">Sei stato registrato <a href="index.php">Clicca per effettuare il login</a></div>');
+        }
+        ?>
+
     </div>
 
     <?php
@@ -232,11 +245,8 @@
             case 3:
                 echo "<script>alert('Password diverse')</script>";
                 break;
-        }
-    } else if (isset($_GET['ok'])) {
-        switch ($_GET['ok']) {
-            case 1:
-                echo "<script>alert('')</script>";
+            case 4:
+                echo "<script>alert('Email già presa')</script>";
                 break;
         }
     }

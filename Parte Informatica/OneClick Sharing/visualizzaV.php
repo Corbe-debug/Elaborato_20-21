@@ -13,7 +13,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
     <title>OneClick Sharing</title>
-    
+
     <style>
         * {
             box-sizing: border-box;
@@ -120,13 +120,12 @@ session_start();
         <nav class="nav"> <a class="logo" href="index.php"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
                 <li><a href="#">Come funziona?</a></li>
-                <li><a href="visualizzaV.php">Visualizza i vestiti</a></li>
                 <?php
                 if (isset($_SESSION["loginA"])) {
                     echo ('<li><a href="#">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
-                    echo ('<li><a href="donaV.php">Dona un vestito</a></li>');
-                } 
+                    echo ('<li><a href="#">Dona un vestito</a></li>');
+                }
                 ?>
 
             </ul>
@@ -146,66 +145,6 @@ session_start();
         </nav>
     </header>
 
-
-    <!----------Schermata di benevenuto con alcune foto dei vestiti presenti------>
-    <center>
-        <br>
-
-        <?php
-        if (isset($_SESSION["loginA"])) {
-            echo ("<h1 class='welcomeText'>Bentornato admin</h1>");
-            echo ("<p class='welcomeText'>Visualizza i vestiti presenti oppure i log degli utenti</p>");
-        } else if (isset($_SESSION["loginC"])) {
-            echo ("<h1 class='welcomeText'>Benvenuto $_SESSION[Nome]</h1>");
-            echo ("<p class='welcomeText'>Visualizza i vestiti presenti, compra oppure dona un vestito</p>");
-        } else {
-            echo ("<h1 class='welcomeText'>Benvenuto su OneClick Sharing</h1>");
-            echo ("<p class='welcomeText'>Accedi oppure visualizza alcuni degli indumenti disponibili</p>");
-        }
-        ?>
-
-
-        <!---Slider--->
-        <br><br>
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img src="img/logo.png" class="imgSlider" width="512" height="512">
-                <br><br><br><br>
-                <div class="text">Foto1</div>
-            </div>
-            <div class="mySlides fade">
-                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512">
-                <br><br><br><br>
-                <div class="text">Foto2</div>
-            </div>
-        </div>
-        <br>
-
-        <div style="text-align:center">
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </center>
-
-    <?php
-    //Output errori
-    if (isset($_GET['error'])) {
-        switch ($_GET['error']) {
-            case 1:
-                echo "<script>alert('Campi incompleti')</script>";
-                break;
-            case 2:
-                echo "<script>alert('Email non valida')</script>";
-                break;
-            case 3:
-                echo "<script>alert('Password sbagliata')</script>";
-                break;
-            case 4:
-                echo "<script>alert('Email non trovata')</script>";
-                break;
-        }
-    }
-    ?>
 </body>
 
 </html>

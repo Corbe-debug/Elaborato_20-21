@@ -60,7 +60,7 @@ if (isset($_POST['login-submit'])) {
                     //Controllo se la password è corretta
                     if ($row['PSW'] == md5($psw)) {
                         //Login effettuata
-                        header("Location: ../index.php?ok=1");
+                        header("Location: ../index.php");
                         $_SESSION['loginA'] = true;
                     } else {
                         //Password sbagliata
