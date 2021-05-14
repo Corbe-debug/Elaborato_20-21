@@ -1,0 +1,212 @@
+/* CSS font */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: "Raleway", sans-serif;
+}
+
+
+/* CSS Gallery immagini */
+
+* {
+    box-sizing: border-box;
+}
+
+.mySlides {
+    display: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+
+/* Slideshow container */
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+
+/* Caption text */
+
+.text {
+    color: black;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* The dots/bullets/indicators */
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active {
+    background-color: white;
+}
+
+
+/* Fading animation */
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.imgSlider {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 15px 15px 15px #deeade;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+/* On smaller screens, decrease text size */
+
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px
+    }
+}
+
+
+/* CSS per l'header */
+
+form,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    text-transform: uppercase;
+    margin: 1em 0 1em 1em;
+}
+
+
+/*Font per titoletti di fianco al logo*/
+
+.nav ul a {
+    color: #8c8c8c;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+
+/*Font per l'header del sito*/
+
+.nav {
+    background-color: #dfebdf;
+    padding-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.login {
+    margin-left: auto;
+    display: flex;
+}
+
+.login input,
+.login a,
+.login button {
+    margin-left: 20px;
+}
+
+
+/*Font per i pulsanti login e logout*/
+
+.login button {
+    -webkit-appearance: none;
+    background: #579558;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;
+    font-family: "Raleway", sans-serif;
+}
+
+
+/*Font per pulsante registrati*/
+
+#btnRegistrati {
+    -webkit-appearance: none;
+    background: #579558;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;
+    font-family: "Raleway", sans-serif;
+}
+
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.login a {
+    padding: 5px 2px;
+    text-decoration: none;
+    color: #000;
+}
+
+.login input {
+    background: #dfebdf;
+    color: #333;
+    border: 1px solid;
+    padding: 10px;
+    size: 50px;
+    font-size: 15px;
+}
+
+.welcomeText {
+    font-size: 25px;
+    color: black;
+}
+
+body {
+    background-color: #dfebdf;
+}

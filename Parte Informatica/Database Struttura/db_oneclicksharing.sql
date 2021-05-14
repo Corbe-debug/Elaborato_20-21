@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2021 at 06:10 PM
+-- Generation Time: May 12, 2021 at 11:34 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -79,7 +79,10 @@ CREATE TABLE `vestito` (
   `Valutazione` int(11) NOT NULL,
   `Disponibile` tinyint(1) NOT NULL,
   `PathImmagine` varchar(50) NOT NULL,
-  `idC1` int(11) NOT NULL
+  `DataDonazione` varchar(20) NOT NULL,
+  `DataAcquisto` varchar(20) NOT NULL,
+  `idC1` int(11) NOT NULL,
+  `idC2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -110,7 +113,8 @@ ALTER TABLE `log`
 --
 ALTER TABLE `vestito`
   ADD PRIMARY KEY (`idV`),
-  ADD KEY `idC1` (`idC1`);
+  ADD KEY `idC1` (`idC1`),
+  ADD KEY `idC2` (`idC2`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -120,13 +124,13 @@ ALTER TABLE `vestito`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `idA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idC` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `log`
@@ -154,7 +158,8 @@ ALTER TABLE `log`
 -- Constraints for table `vestito`
 --
 ALTER TABLE `vestito`
-  ADD CONSTRAINT `vestito_ibfk_1` FOREIGN KEY (`idC1`) REFERENCES `cliente` (`idC`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `vestito_ibfk_1` FOREIGN KEY (`idC1`) REFERENCES `cliente` (`idC`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `vestito_ibfk_2` FOREIGN KEY (`idC2`) REFERENCES `cliente` (`idC`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

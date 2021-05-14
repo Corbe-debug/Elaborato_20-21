@@ -1,32 +1,50 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE HTML>
-<html>
+<html lang="it">
 
 <head>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/styleIndex.css" />
+    <script src="js/script.js"></script>
     <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
+
     <title>OneClick Sharing</title>
-    <link rel="shortcut icon" type="image/jpg" href="img/logo.ico" />
 </head>
 
-<body>
+<body onload="showSlides()">
+
     <!----------Header con link per login e signup------>
     <header>
-        <nav class="nav"> <a class="logo" href="#"> <img src="img/logo.png" alt="logo"> </a>
+        <nav class="nav"> <a class="logo" href="index.php"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">About me</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="funzionamento.php">Come funziona?</a></li>
+                <li><a href="visualizza.php">Visualizza i vestiti</a></li>
+
+                <?php
+                if (isset($_SESSION["loginA"])) {
+                    echo ('<li><a href="#">Log utenti</a></li>');
+                } else if (isset($_SESSION["loginC"])) {
+                    echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
+                }
+                ?>
+
             </ul>
             <div class="login">
-                <form action="includes/login.inc.php" method="post">
-                    <input type="text" name="mailuid" placeholder="Username or Email...">
-                    <input type="password" name="pwd" placeholder="Password...">
+                <form action="validator/login.inc.php" method="POST">
+                    <input type="text" name="email" placeholder="Email">
+                    <input type="password" name="psw" placeholder="Password">
                     <button type="submit" name="login-submit">Login</button>
                 </form>
-                <a href="signup.php">Signup</a>
-                <form action="includes/logout.inc.php" method="post">
+                <form action="signup.php">
+                    <input id="btnRegistrati" type="submit" value="Registrati" />
+                </form>
+                <form action="validator/logout.inc.php" method="post">
                     <button type="submit" name="logout-submit">Logout</button>
                 </form>
             </div>
@@ -34,33 +52,63 @@
     </header>
 
 
-    <!----------Schermata di benevenuto con foto vestiti presenti------>
+    <!----------Schermata di benevenuto------>
     <center>
-        <h2 class="welcomeText">Benvenuto su OneClick Sharing</h2>
-        <h3 class="welcomeText">Accedi o visualizza alcuni degli indumenti disponibili</h3>
+        <br>
 
-        <!-- Gallery -->
-        <div class="row">
-            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                ciao
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg" class="w-100 shadow-1-strong rounded mb-4" alt="CIAAAAAAAAAAA" />
+        <?php
+        if (isset($_SESSION["loginA"])) {
+            echo ("<h1 class='welcomeText'>Bentornato admin</h1>");
+            echo ("<p class='welcomeText'>Visualizza i vestiti presenti oppure i log degli utenti</p>");
+        } else if (isset($_SESSION["loginC"])) {
+            echo ("<h1 class='welcomeText'>Benvenuto $_SESSION[Nome]</h1>");
+            echo ("<p class='welcomeText'>Visualizza i vestiti presenti, compra oppure dona un vestito</p>");
+        } else {
+            echo ("<h1 class='welcomeText'>Benvenuto su OneClick Sharing</h1>");
+            echo ("<p class='welcomeText'>Accedi oppure visualizza alcuni degli indumenti disponibili</p>");
+        }
+        ?>
 
-                <img src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
+        <!---Slider vestiti disponibili--->
+        <br><br>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512" alt="Immagine non disponibile">
+                <br><br><br><br>
+                <div class="text">Foto1</div>
             </div>
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <img src="https://mdbootstrap.com/img/Photos/Vertical/mountain2.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
-
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
-            </div>
-
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
-
-                <img src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" />
+            <div class="mySlides fade">
+                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512" alt="Immagine non disponibile">
+                <br><br><br><br>
+                <div class="text">Foto2</div>
             </div>
         </div>
-    </center>
-</body>
 
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </center>
+
+    <?php
+    if (isset($_GET['error'])) {
+        switch ($_GET['error']) {
+            case 1:
+                echo "<script>alert('Campi incompleti')</script>";
+                break;
+            case 2:
+                echo "<script>alert('Email non valida')</script>";
+                break;
+            case 3:
+                echo "<script>alert('Password sbagliata')</script>";
+                break;
+            case 4:
+                echo "<script>alert('Email non trovata')</script>";
+                break;
+        }
+    }
+    ?>
+</body>
 </html>
