@@ -3,130 +3,35 @@ session_start();
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html lang="it">
 
 <head>
-    <link rel="stylesheet" href="css/styleIV.css" />
+    <link rel="stylesheet" href="css/styleIndex.css" />
     <script src="js/script.js"></script>
     <meta charset="utf-8">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
+
     <title>OneClick Sharing</title>
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: "Raleway", sans-serif;
-        }
-
-        .mySlides {
-            display: none;
-        }
-
-        img {
-            vertical-align: middle;
-        }
-
-        /* Slideshow container */
-        .slideshow-container {
-            max-width: 1000px;
-            position: relative;
-            margin: auto;
-        }
-
-        /* Caption text */
-        .text {
-            color: black;
-            font-size: 15px;
-            padding: 8px 12px;
-            position: absolute;
-            bottom: 8px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* The dots/bullets/indicators */
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-
-        .active {
-            background-color: white;
-        }
-
-        /* Fading animation */
-        .fade {
-            -webkit-animation-name: fade;
-            -webkit-animation-duration: 1.5s;
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
-
-        .imgSlider {
-            border: 1px solid;
-            padding: 10px;
-            box-shadow: 15px 15px 15px #deeade;
-        }
-
-        @-webkit-keyframes fade {
-            from {
-                opacity: .4
-            }
-
-            to {
-                opacity: 1
-            }
-        }
-
-        @keyframes fade {
-            from {
-                opacity: .4
-            }
-
-            to {
-                opacity: 1
-            }
-        }
-
-        /* On smaller screens, decrease text size */
-        @media only screen and (max-width: 300px) {
-            .text {
-                font-size: 11px
-            }
-        }
-    </style>
-
 </head>
 
-<body onload="showSlides()" style="background-color:#dfebdf">
+<body onload="showSlides()">
+
     <!----------Header con link per login e signup------>
     <header>
         <nav class="nav"> <a class="logo" href="index.php"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
-                <li><a href="#">Come funziona?</a></li>
-                <li><a href="visualizzaV.php">Visualizza i vestiti</a></li>
+                <li><a href="funzionamento.php">Come funziona?</a></li>
+                <li><a href="visualizza.php">Visualizza i vestiti</a></li>
+
                 <?php
                 if (isset($_SESSION["loginA"])) {
                     echo ('<li><a href="#">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
-                    echo ('<li><a href="donaV.php">Dona un vestito</a></li>');
-                } 
+                    echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
+                }
                 ?>
 
             </ul>
@@ -147,7 +52,7 @@ session_start();
     </header>
 
 
-    <!----------Schermata di benevenuto con alcune foto dei vestiti presenti------>
+    <!----------Schermata di benevenuto------>
     <center>
         <br>
 
@@ -164,21 +69,21 @@ session_start();
         }
         ?>
 
-
-        <!---Slider--->
+        <!---Slider vestiti disponibili--->
         <br><br>
         <div class="slideshow-container">
             <div class="mySlides fade">
-                <img src="img/logo.png" class="imgSlider" width="512" height="512">
+                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512" alt="Immagine non disponibile">
                 <br><br><br><br>
                 <div class="text">Foto1</div>
             </div>
             <div class="mySlides fade">
-                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512">
+                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512" alt="Immagine non disponibile">
                 <br><br><br><br>
                 <div class="text">Foto2</div>
             </div>
         </div>
+
         <br>
 
         <div style="text-align:center">
@@ -188,7 +93,6 @@ session_start();
     </center>
 
     <?php
-    //Output errori
     if (isset($_GET['error'])) {
         switch ($_GET['error']) {
             case 1:
@@ -207,5 +111,4 @@ session_start();
     }
     ?>
 </body>
-
 </html>

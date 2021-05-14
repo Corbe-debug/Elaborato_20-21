@@ -1,3 +1,16 @@
+/* CSS font */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: "Raleway", sans-serif;
+}
+
 form,
 ul {
     margin: 0;
@@ -11,14 +24,18 @@ ul {
     margin: 1em 0 1em 1em;
 }
 
+
 /*Font per titoletti difianco al logo*/
+
 .nav ul a {
     color: #8c8c8c;
     text-decoration: none;
     margin-left: 15px;
 }
 
+
 /*Font per l'header del sito*/
+
 .nav {
     background-color: #dfebdf;
     padding-top: 1em;
@@ -38,7 +55,9 @@ ul {
     margin-left: 20px;
 }
 
+
 /*Font per i pulsanti login e logout*/
+
 .login button {
     -webkit-appearance: none;
     background: #579558;
@@ -49,14 +68,16 @@ ul {
     font-family: "Raleway", sans-serif;
 }
 
+
 /*Font per pulsante registrati*/
-#btnRegistrati{
+
+#btnRegistrati {
     -webkit-appearance: none;
     background: #579558;
     color: white;
     padding: 15px 20px;
     border-radius: 5px;
-    border: none;  
+    border: none;
     font-family: "Raleway", sans-serif;
 }
 
@@ -78,11 +99,12 @@ ul {
     border: 1px solid;
     padding: 10px;
     size: 50px;
-    font-size:15px;
-
+    font-size: 15px;
 }
 
-.welcomeText {
-    font-size: 25px;
-    color: black;
+#text {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    border: 1px solid;
 }
