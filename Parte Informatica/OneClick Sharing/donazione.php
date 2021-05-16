@@ -49,7 +49,7 @@ if (isset($_SESSION["loginC"])) {
         </header>
 
         <div class="donazione-form">
-            <form action="validator/donazione.inc.php" onsubmit="return controllaDonazione()" method="post">
+            <form action="validator/donazione.inc.php" onsubmit="return ontrollaDonazione()" method="post" enctype="multipart/form-data">
                 <h2>Dona un vestito</h2>
                 <p>Compila ogni campo per donare!</p>
                 <hr>
@@ -57,8 +57,7 @@ if (isset($_SESSION["loginC"])) {
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <span class="fa fa-tshirt"></span>
-                                <i class='fas fa-tshirt'></i>
+                                <i class="fa fa-tag" aria-hidden="true"></i>
                             </span>
                         </div>
                         <input type="text" class="form-control" id="Tipo" name="Tipo" placeholder="Tipo di vestito" required="required">
@@ -68,7 +67,7 @@ if (isset($_SESSION["loginC"])) {
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <span class="fa fa-user"></span>
+                                <i class="fa fa-tag" aria-hidden="true"></i>
                             </span>
                         </div>
                         <input type="text" class="form-control" id="Marca" name="Marca" placeholder="Marca" required="required">
@@ -78,7 +77,17 @@ if (isset($_SESSION["loginC"])) {
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <i class="fa fa-birthday-cake"></i>
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" id="Taglia" name="Taglia" placeholder="Taglia" required="required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-tag" aria-hidden="true"></i>
                             </span>
                         </div>
                         <input type="text" class="form-control" id="Colore" name="Colore" placeholder="Colore" required="required">
@@ -88,45 +97,62 @@ if (isset($_SESSION["loginC"])) {
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <i class="fa fa-home"></i>
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="Descrizione" name="Descrizione" placeholder="Descrizione" required="required">
+                        <textarea rows="4" cols="50" class="form-control" id="Descrizione" name="Descrizione" placeholder="Descrizione" required="required"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <i class="fa fa-envelope"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input type="email" class="form-control" id="Valutazione" name="Valutazione" placeholder="Valutazione" required="required">
+                        <input type="number" min="1" max="5" class="form-control" id="Valutazione" name="Valutazione" placeholder="Valutazione" required="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <i class="fa fa-lock"></i>
+                                <i class="fa fa-picture-o" aria-hidden="true"></i>
                             </span>
                         </div>
-                        <input type="password" class="form-control" id="PSW" name="PSW" placeholder="Password" required="required">
+                        <label>&nbsp;Carica un' immagine dell'indumento</label>
+                        <input type="file" name="IMG" id="IMG" required="required">
                     </div>
-                </div>
-                <?php
-                if (!isset($_SESSION["registrato"])) {
-                    echo ('<div class="form-group">
-                <button type="submit" name="login-signup" class="btn btn-primary btn-lg">Registrati</button>
-                </div>');
-                } else {
-                    echo ('<div class="form-group">
-                <button type="submit" name="login-signup" class="btn btn-primary btn-lg">Registra un altro utente</button>
-                </div>');
-                }
-                ?>
-            </form>
 
+                    <br>
+
+                    <?php
+                    if (!isset($_SESSION["donazione"])) {
+                        echo ('<div class="form-group">
+                        <button type="submit" name="donazione" class="btn btn-primary btn-lg">Dona</button>
+                        </div>');
+                    } else {
+                        echo ('<div class="form-group">
+                        <button type="submit" name="donazione" class="btn btn-primary btn-lg">Dona un altro vestito</button>
+                        </div>');
+                    }
+
+                    if (isset($_GET['error'])) {
+                        switch ($_GET['error']) {
+                            case 1:
+                                echo "<script>alert('Campi incompleti')</script>";
+                                break;
+                            case 2:
+                                echo "<script>alert('Non hai caricato un immagine')</script>";
+                                break;
+                            case 3:
+                                echo "<script>alert('Errore nella donazione, riprova')</script>";
+                                break;
+                        }
+                    }
+                    ?>
+            </form>
+        </div>
     </body>
 
     </html>

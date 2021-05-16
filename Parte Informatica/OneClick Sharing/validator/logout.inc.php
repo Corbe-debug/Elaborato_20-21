@@ -8,4 +8,6 @@ if (isset($_POST['logout-submit'])) {
     session_destroy();
 
     header("Location: ../index.php");
+}else{
+    header("Location: ../index.php");
 }

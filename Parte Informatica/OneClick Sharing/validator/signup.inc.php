@@ -2,7 +2,7 @@
 session_start();
 
 //Verifico il submit dal signup
-if (isset($_POST['login-signup'])) {
+if (isset($_POST['signup'])) {
     include 'connection.php';
 
     //Prendo i vari valori e li controllo
@@ -14,28 +14,28 @@ if (isset($_POST['login-signup'])) {
     $psw = $_POST["PSW"];
     $confirmPsw = $_POST["ConfirmPSW"];
 
-    if (($nome == "") || ($nome == "")) {
+    if (($nome == "") || ($nome == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
-    } else if (($cognome == "") || ($cognome == "")) {
+    } else if (($cognome == "") || ($cognome == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
-    } else if (($dataNascita == "") || ($dataNascita == "")) {
+    } else if (($dataNascita == "") || ($dataNascita == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
-    } else if (($indirizzo == "") || ($indirizzo == "")) {
+    } else if (($indirizzo == "") || ($indirizzo == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
-    } else if (($email == "") || ($email == "")) {
+    } else if (($email == "") || ($email == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         //Email non valida
         header("Location: ../signup.php?error=2");
-    } else if (($psw == "") || ($psw == "")) {
+    } else if (($psw == "") || ($psw == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
-    } else if (($confirmPsw == "") || ($confirmPsw == "")) {
+    } else if (($confirmPsw == "") || ($confirmPsw == null)) {
         //Campi incompleti
         header("Location: ../signup.php?error=1");
     } else if ($psw != $confirmPsw) {
@@ -91,4 +91,6 @@ if (isset($_POST['login-signup'])) {
             }
         }
     }
+} else{
+    header("Location: ../signup.php");
 }

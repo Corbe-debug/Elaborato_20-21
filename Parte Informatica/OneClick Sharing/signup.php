@@ -116,11 +116,11 @@ session_start();
             <?php
             if (!isset($_SESSION["registrato"])) {
                 echo ('<p class="form-group">
-                <button type="submit" name="login-signup" class="btn btn-primary btn-lg">Registrati</button>
+                <button type="submit" name="signup" class="btn btn-primary btn-lg">Registrati</button>
                 </p>');
             } else {
                 echo ('<p class="form-group">
-                <button type="submit" name="login-signup" class="btn btn-primary btn-lg">Registra un altro utente</button>
+                <button type="submit" name="signup" class="btn btn-primary btn-lg">Registra un altro utente</button>
                 </p>');
             }
             ?>

@@ -8,7 +8,7 @@ if (isset($_POST['login-submit'])) {
     $email = $_POST["email"];
     $psw = $_POST["psw"];
 
-    if (($email == "") || ($psw == "")) {
+    if (($email == "") || ($psw == null)) {
         //Campi incompleti
         header("Location: ../index.php?error=1");
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -18,7 +18,7 @@ if (isset($_POST['login-submit'])) {
         //Controllo se è presente un'email così nel Database, prima controllando nella tabella Cliente
 
         //Query
-        $sql = "SELECT * FROM Cliente WHERE email= '$email'";
+        $sql = "SELECT * FROM Cliente WHERE Email= '$email'";
 
         //Connessione
         $conn = connect('db_oneclicksharing');
@@ -27,20 +27,26 @@ if (isset($_POST['login-submit'])) {
         //Controllo il risultato della query
         if ($result->num_rows > 0) {
             //Email presente
-            while ($row = $result->fetch_assoc()) {
-                //Controllo se la password è corretta
-                if ($row['PSW'] == md5($psw)) {
-                    //Login effettuata
+            //Controllo che l'email non sia quella del master (utilizzato per fk nulle)
+            if ($email != "DB") {
+                while ($row = $result->fetch_assoc()) {
+                    //Controllo se la password è corretta
+                    if ($row['PSW'] == md5($psw)) {
+                        //Login effettuata
 
-                    //Imposto le sessioni per il login, nome e email
-                    $_SESSION['loginC'] = true;
-                    $_SESSION['Nome'] = $row['Nome'];
-                    header("Location: ../index.php");
-
-                } else {
-                    //Password sbagliata
-                    header("Location: ../index.php?error=3");
+                        //Imposto le sessioni per il login, nome e email
+                        $_SESSION['loginC'] = true;
+                        $_SESSION['Nome'] = $row['Nome'];
+                        $_SESSION['Email'] = $email;
+                        header("Location: ../index.php");
+                    } else {
+                        //Password sbagliata
+                        header("Location: ../index.php?error=3");
+                    }
                 }
+            } else {
+                //Login non possibile
+                header("Location: ../index.php");
             }
         } else {
             //Email non presente nella tabella Cliente, provo a cercarla nella tabella Admin
