@@ -58,7 +58,7 @@ session_start();
                 La moneta di scambio utilizzata è la stella "⭐". Ogni vestito viene valutato dal venditore tramite delle stelle e ogni cliente potrà acquistare un vestito
                 tramite le stesse.
                 <br><br>
-                Un nuovo modo di acquistare e vendere, per un modo sempre più green.
+                Un nuovo modo di acquistare e vendere, per un mondo sempre più green.
             </h3>
         </div>
     </center>

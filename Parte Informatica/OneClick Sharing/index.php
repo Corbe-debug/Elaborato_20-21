@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'validator/connection.php';
 ?>
 
 <!DOCTYPE HTML>
@@ -9,7 +10,7 @@ session_start();
     <link rel="stylesheet" href="css/styleIndex.css" />
     <script src="js/script.js"></script>
     <meta charset="utf-8">
-    
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
@@ -55,7 +56,6 @@ session_start();
     <!----------Schermata di benevenuto------>
     <center>
         <br>
-
         <?php
         if (isset($_SESSION["loginA"])) {
             echo ("<h1 class='welcomeText'>Bentornato admin</h1>");
@@ -65,31 +65,62 @@ session_start();
             echo ("<p class='welcomeText'>Visualizza i vestiti presenti, compra oppure dona un vestito</p>");
         } else {
             echo ("<h1 class='welcomeText'>Benvenuto su OneClick Sharing</h1>");
-            echo ("<p class='welcomeText'>Accedi oppure visualizza alcuni degli indumenti disponibili</p>");
+            echo ("<p class='welcomeText'>Accedi oppure visualizza gli indumenti disponibili</p>");
         }
         ?>
 
         <!---Slider vestiti disponibili--->
         <br><br>
         <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512" alt="Immagine non disponibile">
-                <br><br><br><br>
-                <div class="text">Foto1</div>
-            </div>
-            <div class="mySlides fade">
-                <img src="img/logo_small_icon_only_inverted.png" class="imgSlider" width="512" height="512" alt="Immagine non disponibile">
-                <br><br><br><br>
-                <div class="text">Foto2</div>
-            </div>
-        </div>
+            <?php
+            //Visualizzo 4 foto random di vestiti presenti
+            $sql = "SELECT * FROM Vestito WHERE Disponibile = 1";
 
-        <br>
+            //Connessione
+            $conn = connect('db_oneclicksharing');
+            $result = $conn->query($sql);
+            $temp = $result->num_rows;
 
-        <div style="text-align:center">
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
+            if ($temp > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    //Visualizzo 4 foto
+                    //Ottengo il path dell'immagine e il tipo di vestito
+                    $img = "img/imgVestiti/" . $row["PathImmagine"];
+                    $tipo = $row["Tipo"];
+
+                    //Visualizzo la foto
+                    echo ("<div class='mySlides fade'>
+                    <img src=$img class='imgSlider' width='350' height='350' alt='Nessuna immagine trovata'>
+                    <br><br><br><br>
+                </div>");
+                }
+
+                //In base al numero di foto che ho, visualizzo sotto i "dot"
+                if ($temp == 4) {
+                    echo ('<div style="text-align:center">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                     </div>');
+                } else {
+                    echo ('<div style="text-align:center">');
+                    for ($i = 0; $i < $temp; $i++) {
+                        echo ('<span class="dot"></span>');
+                    }
+                    echo ('</div>');
+                }
+
+            //Nessun vestito nel Database
+            } else {
+                echo ('<div class="mySlides fade">
+                <img src="" class="imgSlider" alt="Nessun vestito presente">
+            </div>');
+            }
+            ?>
+            <br>
+
+
     </center>
 
     <?php
@@ -111,4 +142,5 @@ session_start();
     }
     ?>
 </body>
+
 </html>
