@@ -20,7 +20,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/jpg" href="img/logo.ico" />
-    
+
     <title>OneClick Sharing - Registrati</title>
     <style>
         body {
@@ -121,16 +121,23 @@ session_start();
             } else {
                 echo ('<p class="form-group">
                 <button type="submit" name="signup" class="btn btn-primary btn-lg">Registra un altro utente</button>
+                <br><br>
+                <form action="index.php">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Sei registrato, effettua il login" />
+                </form>
                 </p>');
             }
             ?>
         </form>
-
         <?php
         if (!isset($_SESSION["registrato"])) {
             echo ('<p class="text-center">Hai già un account? <a href="index.php">Log in</a></p>');
         } else {
-            echo ('<p class="text-center">Sei stato registrato <a href="index.php">Clicca per effettuare il login</a></p>');
+            echo ('<script>
+            if (confirm("Sei stato registrato! Premi ok per effetuare il login, annulla per registrare un nuovo account")) {
+                window.location.replace("index.php");
+              }
+            </script>');
         }
         ?>
 
