@@ -1,0 +1,277 @@
+/* CSS font */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: "Raleway", sans-serif;
+}
+
+
+/* CSS per l'header */
+
+form,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    text-transform: uppercase;
+    margin: 1em 0 1em 1em;
+}
+
+
+/*Font per titoletti di fianco al logo*/
+
+.nav ul a {
+    color: #8c8c8c;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+
+/*Font per l'header del sito*/
+
+.nav {
+    background-color: #dfebdf;
+    padding-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.login {
+    margin-left: auto;
+    display: flex;
+}
+
+.login input,
+.login a,
+.login button {
+    margin-left: 20px;
+}
+
+
+/*Font per i pulsanti login e logout*/
+
+.login button {
+    -webkit-appearance: none;
+    background: #579558;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;
+    font-family: "Raleway", sans-serif;
+}
+
+
+/*Font per pulsante registrati*/
+
+#btnRegistrati {
+    -webkit-appearance: none;
+    background: #579558;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;
+    font-family: "Raleway", sans-serif;
+}
+
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.login a {
+    padding: 5px 2px;
+    text-decoration: none;
+    color: #000;
+}
+
+.login input {
+    background: #dfebdf;
+    color: #333;
+    border: 1px solid;
+    padding: 10px;
+    size: 50px;
+    font-size: 15px;
+}
+
+.welcomeText {
+    font-size: 25px;
+    color: black;
+}
+
+#container2 {
+    overflow-x: auto;
+    overflow-y: scroll;
+    height: 570px;
+    width: 35%;
+}
+
+#container {
+    margin-top: 3%;
+}
+
+.linea {
+    border: none;
+    height: 20px;
+    width: 90%;
+    height: 50px;
+    margin-top: 0;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 20px 20px -20px rgb(88, 85, 85);
+    margin: -50px auto 10px;
+    animation: gradientRiga 25s ease infinite;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #93d898;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+
+/* BOTTONE INDIETRO */
+
+#i_bback {
+    border-radius: 4px;
+    background-color: #579558;
+    border: 2px solid #579558;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 18px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 4px 2px;
+    text-align: center;
+}
+
+#i_bback span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+#i_bback:hover span {
+    padding-right: 25px;
+}
+
+#i_bback:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+#i_bback:hover {
+    background-color: #579558;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+/* Scrollbar */
+
+
+/* width */
+
+#container2::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Sfondo scroll */
+
+#container2::-webkit-scrollbar-track {
+    background: #d3d2d2;
+}
+
+
+/* Colore scroll */
+
+#container2::-webkit-scrollbar-thumb {
+    background: #579558;
+}
+
+
+/* Colore scroll hover */
+
+#container2::-webkit-scrollbar-thumb:hover {
+    background: #579558;
+}
+
+
+/* Parte responsive */
+
+@media screen and (max-width: 1000px) {
+    #container {
+        margin-top: 16%;
+    }
+    #container2 {
+        overflow-x: auto;
+        overflow-y: scroll;
+        height: 570px;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 633px) {
+    #container {
+        margin-top: 20%;
+    }
+    #container2 {
+        overflow-x: auto;
+        overflow-y: scroll;
+        height: 570px;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #container {
+        margin-top: 30%;
+    }
+    #container2 {
+        overflow-x: auto;
+        overflow-y: scroll;
+        height: 570px;
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    #container {
+        margin-top: 40%;
+    }
+    #container2 {
+        overflow-x: auto;
+        overflow-y: scroll;
+        height: 570px;
+        width: 50%;
+    }
+}

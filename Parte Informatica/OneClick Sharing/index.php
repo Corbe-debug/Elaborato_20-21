@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'validator/connection.php';
+include 'validator/eseguiQuery.php';
 ?>
 
 <!DOCTYPE HTML>
@@ -29,9 +29,25 @@ include 'validator/connection.php';
 
                 <?php
                 if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="#">Log utenti</a></li>');
+                    echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
+
+                    //Ottengo l'id del cliente tramite email
+                    $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
+
+                    //Connessione
+                    $result = querySelect($sql);
+                    $temp = $result->num_rows;
+
+                    if ($temp > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $idC = $row["idC"];
+                            break;
+                        }
+
+                        echo ("<li><a href='profilo.php?id=$idC'>Profilo</a></li>");
+                    }
                 }
                 ?>
 
@@ -77,22 +93,27 @@ include 'validator/connection.php';
             $sql = "SELECT * FROM Vestito WHERE Disponibile = 1";
 
             //Connessione
-            $conn = connect('db_oneclicksharing');
-            $result = $conn->query($sql);
+            $result = querySelect($sql);
             $temp = $result->num_rows;
+            $i = 0;
 
             if ($temp > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    //Visualizzo 4 foto
+                    //Visualizzo 4 foto massimo
+                    if ($i == 4) {
+                        break;
+                    }
+
                     //Ottengo il path dell'immagine e il tipo di vestito
                     $img = "img/imgVestiti/" . $row["PathImmagine"];
                     $tipo = $row["Tipo"];
 
                     //Visualizzo la foto
                     echo ("<div class='mySlides fade'>
-                    <img src=$img class='imgSlider' width='350' height='350' alt='Nessuna immagine trovata'>
+                    <img src=$img class='imgSlider' width='auto' height=auto alt='Nessuna immagine trovata'>
                     <br><br><br><br>
                 </div>");
+                    $i++;
                 }
 
                 //In base al numero di foto che ho, visualizzo sotto i "dot"
@@ -111,7 +132,7 @@ include 'validator/connection.php';
                     echo ('</div>');
                 }
 
-            //Nessun vestito nel Database
+                //Nessun vestito nel Database
             } else {
                 echo ('<div class="mySlides fade">
                 <img src="" class="imgSlider" alt="Nessun vestito presente">
@@ -137,6 +158,15 @@ include 'validator/connection.php';
                 break;
             case 4:
                 echo "<script>alert('Email non trovata')</script>";
+                break;
+        }
+    } else if (isset($_GET['ok'])) {
+        switch ($_GET['ok']) {
+            case 1:
+                echo "<script>alert('Hai acquistato un vestito, complimenti')</script>";
+                break;
+            case 2:
+                echo "<script>alert('Hai donato un vestito, complimenti')</script>";
                 break;
         }
     }

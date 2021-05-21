@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'validator/connection.php';
+include 'validator/eseguiQuery.php';
 ?>
 
 <!DOCTYPE HTML>
@@ -34,11 +34,28 @@ include 'validator/connection.php';
         <nav class="nav"> <a class="logo" href="index.php"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
                 <li><a href="funzionamento.php">Come funziona?</a></li>
+                <li><a href="visualizza.php">Visualizza i vestiti</a></li>
                 <?php
                 if (isset($_SESSION["loginA"])) {
                     echo ('<li><a href="#">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
+
+                    //Ottengo l'id del cliente tramite email
+                    $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
+
+                    //Connessione
+                    $result = querySelect($sql);
+                    $temp = $result->num_rows;
+
+                    if ($temp > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $idC = $row["idC"];
+                            break;
+                        }
+
+                        echo ("<li><a href='profilo.php?id=$idC'>Profilo</a></li>");
+                    }
                 }
                 ?>
 
@@ -67,31 +84,28 @@ include 'validator/connection.php';
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
 
-            //Prendo tutti gli id presenti sul database e vedo se almeno uno è uguale a quello presente nel get (criptato)
-            $sql = "SELECT idV FROM Vestito";
+            //Prendo tutti gli id dei vestiti disponibili presenti sul Database e vedo se almeno uno è uguale a quello presente nel get
+            $sql = "SELECT idV FROM Vestito WHERE Disponibile = '1'";
 
             //Connessione
-            $conn = connect('db_oneclicksharing');
-            $result = $conn->query($sql);
+            $result = querySelect($sql);
             $temp = $result->num_rows;
 
             $controllo = false;
 
             if ($temp > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    if (password_verify($row["idV"], $id)) {
-                        $id = $row["idV"];
+                    if ($row["idV"] == $id) {
                         $controllo = true;
                         break;
                     }
                 }
                 if ($controllo) {
                     //Id trovato, visualizzo i vari dati
-                    $sql = "SELECT * FROM Vestito WHERE idV = $id";
+                    $sql = "SELECT * FROM Vestito WHERE idV = $id AND idC1 != $idC";
 
                     //Connessione
-                    $conn = connect('db_oneclicksharing');
-                    $result = $conn->query($sql);
+                    $result = querySelect($sql);
                     $temp = $result->num_rows;
 
                     if ($temp > 0) {
@@ -154,7 +168,7 @@ include 'validator/connection.php';
                                                 <dd>$taglia</dd>
                                             </dl> <!-- item-property-hor .// -->");
                                                         ?>
-                                                        <button type="submit" style="background-color:#579558;" class=" btn btn-lg btn-primary text-uppercase">Compra ora</button>
+                                                        <button type="submit" name="acquista-submit" style="background-color:#579558;" class=" btn btn-lg btn-primary text-uppercase">Compra ora</button>
                                             </article> <!-- card-body.// -->
                                         </aside> <!-- col.// -->
                                     </div> <!-- row.// -->
