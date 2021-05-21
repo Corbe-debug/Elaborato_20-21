@@ -1,20 +1,39 @@
 <?php
 session_start();
-include 'validator/eseguiQuery.php';
+include 'validator/visualizzaLog.inc.php';
+
+//Controllo se l'admin è loggato
+if (!isset($_SESSION["loginA"])) {
+    //Ritorno all'index
+    header("Location: index.php");
+}
+
+//Ottengo la tabella contenente i log
+$header = "<tr> <th>Id Log</th><th>Descrizione</th><th>Data e ora</th> <th>Id Cliente</th></tr>";
+$table = getLogTable();
+
+//Stampo una stringa nel caso in cui non vi siano dei record da stampare
+if ($table == "null") {
+    $table = "<h3>Non ci sono log, ritorna più tardi.</h3>";
+} else {
+    $table = $header . $table;
+}
 ?>
 
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="it">
+<html>
 
 <head>
-    <link rel="stylesheet" href="css/styleFunzionamento.css" />
+    <link rel="stylesheet" href="css/styleVisualizzaLog.css" />
     <script src="js/script.js"></script>
     <meta charset="utf-8">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/jpg" href="img/logo_small_icon_only_inverted.png" />
-    <title>OneClick Sharing</title>
 
+    <title>OneClick Sharing - Log</title>
 </head>
 
 <body style="background-color:#dfebdf">
@@ -22,28 +41,14 @@ include 'validator/eseguiQuery.php';
     <header>
         <nav class="nav"> <a class="logo" href="index.php"> <img src="img/logo_small.png" alt="logo"> </a>
             <ul>
+                <li><a href="funzionamento.php">Come funziona?</a></li>
                 <li><a href="visualizza.php">Visualizza i vestiti</a></li>
+
                 <?php
                 if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="#">Log utenti</a></li>');
+                    echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
-
-                    //Ottengo l'id del cliente tramite email
-                    $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
-
-                    //Connessione
-                    $result = querySelect($sql);
-                    $temp = $result->num_rows;
-
-                    if ($temp > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $idC = $row["idC"];
-                            break;
-                        }
-
-                        echo ("<li><a href='profilo.php?id=$idC'>Profilo</a></li>");
-                    }
                 }
                 ?>
 
@@ -65,20 +70,27 @@ include 'validator/eseguiQuery.php';
     </header>
 
     <center>
-        <br>
-        <h1>Benvenuto su OneClick Sharing</h1>
-        <div id="text">
-            <h3>La nostra azienda ha creato un modello di condivisione e scambio seguendo il principio della “sharing economy”, promuovendo forme di consumo più consapevoli basate sul riutilizzo.
-                <br><br>
-                Su questo sito è possibile visualizzare, comprare e donare vestiti usati.
-                <br><br>
-                La moneta di scambio utilizzata è la stella "⭐". Ogni vestito viene valutato dal venditore tramite delle stelle e ogni cliente potrà acquistare un vestito
-                tramite le stesse.
-                <br><br>
-                Un nuovo modo di acquistare e vendere, per un mondo sempre più green.
-            </h3>
+        <div id="container">
+            <h2 class="welcomeText">Visualizza i log dei clienti</h2>
+            <br>
+            <hr class="linea">
+            <br>
+            <br>
+            <div id="container2">
+                <table id= "tStyle">
+                    <?php
+                    echo $table;
+                    ?>
+                </table>
+
+            </div>
+
         </div>
+        <button id="i_bback" name="n_bback" onclick="window.location.href='index.php'"> Indietro </button>
+        <br>
+        <br>
     </center>
+
 </body>
 
 </html>

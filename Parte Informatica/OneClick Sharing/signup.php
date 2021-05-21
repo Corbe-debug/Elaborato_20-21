@@ -35,6 +35,7 @@ session_start();
         <form action="validator/signup.inc.php" onsubmit="return controllaSignup()" method="post">
             <h2>Registrati</h2>
             <p>Compila ogni campo per registrarti!</p>
+            <p>(Registrandoti otterrai 10 stelle omaggio per comprare subito vestiti)</p>
             <hr>
             <div class="form-group">
                 <div class="input-group">
@@ -114,33 +115,13 @@ session_start();
                 </div>
             </div>
             <?php
-            if (!isset($_SESSION["registrato"])) {
-                echo ('<p class="form-group">
+            echo ('<p class="form-group">
                 <button type="submit" name="signup" class="btn btn-primary btn-lg">Registrati</button>
                 </p>');
-            } else {
-                echo ('<p class="form-group">
-                <button type="submit" name="signup" class="btn btn-primary btn-lg">Registra un altro utente</button>
-                <br><br>
-                <form action="index.php">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Sei registrato, effettua il login" />
-                </form>
-                </p>');
-            }
             ?>
         </form>
-        <?php
-        if (!isset($_SESSION["registrato"])) {
-            echo ('<p class="text-center">Hai già un account? <a href="index.php">Log in</a></p>');
-        } else {
-            echo ('<script>
-            if (confirm("Sei stato registrato! Premi ok per effetuare il login, annulla per registrare un nuovo account")) {
-                window.location.replace("index.php");
-              }
-            </script>');
-        }
-        ?>
-
+        <p class="text-center">Hai già un account? <a href="index.php">Log in</a></p>
+        <p class="text-center">Torna <a href="index.php">indietro</a></p>
     </div>
 
     <?php

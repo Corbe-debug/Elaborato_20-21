@@ -3,7 +3,7 @@ session_start();
 
 //Verifico il submit dalla donazione
 if (isset($_POST['donazione'])) {
-    include 'connection.php';
+    include 'eseguiQuery.php';
 
     //Prendo i vari valori e li controllo
     $tipo = $_POST["Tipo"];
@@ -52,8 +52,7 @@ if (isset($_POST['donazione'])) {
             $sql = "SELECT `idC` FROM `cliente` WHERE `Email` = '$emailC'";
 
             //Connessione
-            $conn = connect('db_oneclicksharing');
-            $result = $conn->query($sql);
+            $result = querySelect($sql);
 
             //Controllo il risultato della query
             if ($result->num_rows > 0) {
@@ -83,12 +82,35 @@ if (isset($_POST['donazione'])) {
                         $sql = "INSERT INTO `vestito`(`Tipo`, `Marca`, `Taglia`, `Colore`, `Descrizione`, `Valutazione`, `Disponibile`, `PathImmagine`, `DataDonazione`, `DataAcquisto`, `idC1`, `idC2`) VALUES ('$tipo','$marca','$taglia','$colore','$descrizione','$valutazione','1','$tempImg','$dataOggi','null','$id','0')";
 
                         //Connessione
-                        $conn = connect('db_oneclicksharing');
-                        $result = $conn->query($sql);
+                        $result = queryInsert($sql);
 
                         if ($result) {
                             //Vestito donato
-                            header("Location: ../donazione.php");
+                            //Ottengo l'id del vetsito appena donato
+                            $sql = "SELECT * FROM `vestito` WHERE `PathImmagine` = '$tempImg'";
+
+                            //Connessione
+                            $result = querySelect($sql);
+
+                            //Controllo il risultato della query
+                            if ($result->num_rows > 0) {
+                                //Email presente
+                                while ($row = $result->fetch_assoc()) {
+                                    $idVestitoDonato = $row['idV'];
+                                    break;
+                                }
+                            }
+
+                            //Ottengo la data con l'ora
+                            $dataOggi = date("d/m/Y H:i:s");
+                            $descizione = "Un utente ha donato un vestito con id: " . $idVestitoDonato;
+
+                            //Inserisco il nuovo record nella tabella Log
+                            $sql = "INSERT INTO `log`(`Descrizione`, `DataOra`, `idC1`) VALUES ('$descizione','$dataOggi','$id')";
+                            $result = queryInsert($sql);
+
+
+                            header("Location: ../index.php?ok=2");
                             $_SESSION["donazione"] = true;
                         } else {
                             //Errore, riprova

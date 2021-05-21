@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'validator/eseguiQuery.php';
 
 if (isset($_SESSION["loginC"])) {
 ?>
@@ -31,6 +32,24 @@ if (isset($_SESSION["loginC"])) {
                 <ul>
                     <li><a href="funzionamento.php">Come funziona?</a></li>
                     <li><a href="visualizza.php">Visualizza i vestiti</a></li>
+
+                    <?php
+                    //Ottengo l'id del cliente tramite email
+                    $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
+
+                    //Connessione
+                    $result = querySelect($sql);
+                    $temp = $result->num_rows;
+
+                    if ($temp > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $idC = $row["idC"];
+                            break;
+                        }
+
+                        echo ("<li><a href='profilo.php?id=$idC'>Profilo</a></li>");
+                    }
+                    ?>
                 </ul>
                 <div class="login">
                     <form action="validator/login.inc.php" method="POST">
@@ -127,15 +146,9 @@ if (isset($_SESSION["loginC"])) {
                     <br>
 
                     <?php
-                    if (!isset($_SESSION["donazione"])) {
-                        echo ('<div class="form-group">
+                    echo ('<div class="form-group">
                         <button type="submit" name="donazione" class="btn btn-primary btn-lg">Dona</button>
                         </div>');
-                    } else {
-                        echo ('<div class="form-group">
-                        <button type="submit" name="donazione" class="btn btn-primary btn-lg">Dona un altro vestito</button>
-                        </div>');
-                    }
 
                     if (isset($_GET['error'])) {
                         switch ($_GET['error']) {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'validator/connection.php';
+include 'validator/eseguiQuery.php'
 ?>
 
 <!DOCTYPE HTML>
@@ -200,9 +200,24 @@ include 'validator/connection.php';
                 <li><a href="funzionamento.php">Come funziona?</a></li>
                 <?php
                 if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="#">Log utenti</a></li>');
+                    echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
+                    //Ottengo l'id del cliente tramite email
+                    $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
+
+                    //Connessione
+                    $result = querySelect($sql);
+                    $temp = $result->num_rows;
+
+                    if ($temp > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $idC = $row["idC"];
+                            break;
+                        }
+
+                        echo ("<li><a href='profilo.php?id=$idC'>Profilo</a></li>");
+                    }
                 }
                 ?>
 
@@ -224,12 +239,27 @@ include 'validator/connection.php';
     </header>
 
     <?php
-    //Query per verificare quanti vestiti sono presenti sul sito
-    $sql = "SELECT * FROM Vestito WHERE Disponibile = 1";
+
+    if (isset($_SESSION['Email'])) {
+        //Otengo l'id del cliente con una specifica email
+        $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
+
+        //Connessione
+        $result = querySelect($sql);
+
+        $temp = $result->num_rows;
+        while ($row = $result->fetch_assoc()) {
+            $idC = $row["idC"];
+        }
+
+        //Query per verificare quanti vestiti sono presenti sul sito
+        $sql = "SELECT * FROM Vestito WHERE Disponibile = 1 AND idC1 != $idC";
+    } else {
+        $sql = "SELECT * FROM Vestito WHERE Disponibile = 1";
+    }
 
     //Connessione
-    $conn = connect('db_oneclicksharing');
-    $result = $conn->query($sql);
+    $result = querySelect($sql);
     $temp = $result->num_rows;
 
     if ($temp > 0) {
@@ -239,7 +269,8 @@ include 'validator/connection.php';
         if (isset($_SESSION["loginC"])) {
             $s = "SELECT Stelle FROM Cliente WHERE Email = '$_SESSION[Email]'";
 
-            $r = $conn->query($s);
+            //Connessione
+            $r = querySelect($s);
             $k = $r->num_rows;
 
             if ($k > 0) {
@@ -283,16 +314,22 @@ include 'validator/connection.php';
                         $tipo = $row["Tipo"];
                         //Ottengo la valutazione del vestito (castandola in int)
                         $valutazione = intval($row["Valutazione"]);
-                        //Ottengo l'id dell'immagine e la cripto
-                        $id = password_hash($row["idV"], PASSWORD_DEFAULT);
+                        //Ottengo l'id dell'immagine
+                        $id = $row["idV"];
 
 
                         //Visualizzazione di un'immagine con i vari valori
                         echo ("<div class='col-sm-3'>
                                         <div class='thumb-wrapper'>
-                                            <div class='img-box'>
-                                            <a href='acquista.php?id=$id'><img src='$img' class='img-responsive img-fluidì alt='Non è stata trovata nessuna immagine'></a>
-                                            </div>
+                                            <div class='img-box'>");
+                        if (($credito - $valutazione) < 0) {
+                            //Credito insufficiente
+                            echo ("<img src='$img' class='img-responsive img-fluidì alt='Non è stata trovata nessuna immagine'>");
+                        } else {
+                            //Credito ok
+                            echo (" <a href='acquista.php?id=$id'><img src='$img' class='img-responsive img-fluidì alt='Non è stata trovata nessuna immagine'></>");
+                        }
+                        echo ("</div>
                                         <div class='thumb-content'>
                                             <h4>$tipo</h4>
                                             <div class='star-rating'>
@@ -349,13 +386,11 @@ include 'validator/connection.php';
 
                     //Chiusura tag  pagina
                     echo ("</div>");
-
                     ?>
                 </div>
             </div>
         </div>
         </div>
-
     <?php
     } else {
         //Nessun vestito disponibile nel database, output messaggio
@@ -363,5 +398,4 @@ include 'validator/connection.php';
     }
     ?>
 </body>
-
 </html>

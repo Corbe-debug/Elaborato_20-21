@@ -2,7 +2,7 @@
 session_start();
 //Verifico il submit dal login
 if (isset($_POST['login-submit'])) {
-    include 'connection.php';
+    include 'eseguiQuery.php';
 
     //Prendo i valori di email e password e li controllo
     $email = $_POST["email"];
@@ -21,8 +21,7 @@ if (isset($_POST['login-submit'])) {
         $sql = "SELECT * FROM Cliente WHERE Email= '$email'";
 
         //Connessione
-        $conn = connect('db_oneclicksharing');
-        $result = $conn->query($sql);
+        $result = querySelect($sql);
 
         //Controllo il risultato della query
         if ($result->num_rows > 0) {
@@ -38,7 +37,35 @@ if (isset($_POST['login-submit'])) {
                         $_SESSION['loginC'] = true;
                         $_SESSION['Nome'] = $row['Nome'];
                         $_SESSION['Email'] = $email;
-                        header("Location: ../index.php");
+
+                        if(isset($_SESSION['loginA'])){
+                            unset($_SESSION['loginA']);
+                        }
+
+                        //Salvo informazioni nella tabella log
+                        //Ottengo l'id del cliente loggato
+                        $sql = "SELECT * FROM Cliente WHERE Email = '$_SESSION[Email]'";
+
+                        //Connessione
+                        $result = querySelect($sql);
+                        $temp = $result->num_rows;
+
+                        if ($temp > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $idC = $row["idC"];
+                                break;
+                            }
+
+                            //Ottengo la data con l'ora
+                            $dataOggi = date("d/m/Y H:i:s");
+                            $descizione = "Un utente ha effettuato il login";
+
+                            //Inserisco il nuovo record nella tabella Log
+                            $sql = "INSERT INTO `log`(`Descrizione`, `DataOra`, `idC1`) VALUES ('$descizione','$dataOggi','$idC')";
+                            $result = queryInsert($sql);
+
+                            header("Location: ../index.php");
+                        }
                     } else {
                         //Password sbagliata
                         header("Location: ../index.php?error=3");
@@ -50,14 +77,12 @@ if (isset($_POST['login-submit'])) {
             }
         } else {
             //Email non presente nella tabella Cliente, provo a cercarla nella tabella Admin
-            mysqli_close($conn);
 
             //Query
             $sql = "SELECT * FROM Admin WHERE email= '$email'";
 
             //Connessione
-            $conn = connect('db_oneclicksharing');
-            $result = $conn->query($sql);
+            $result = querySelect($sql);
 
             //Controllo il risultato della query
             if ($result->num_rows > 0) {
