@@ -285,6 +285,7 @@ include 'validator/eseguiQuery.php'
                 <div class="col-md-12">
                     <h2>Visualizza i vestiti disponibili</h2>
                     <?php
+                    //IN base se il cliente ha credito o mneo, visualizzo dei messaggi
                     if (!isset($credito)) {
                         echo ('<center><h3 style="color:red;">Attenzione!, per acquistare qualche vestito, effettua il login o registrati</h3></center>');
                     } else if ($credito == 0) {
@@ -363,7 +364,7 @@ include 'validator/eseguiQuery.php'
                                 </div>
                                 </div>");
                             } else {
-                                //Tutto ok
+                                //Il cliente ha abbastanza stelle, visualizzo pulsante
                                 echo ("</ul>
                                         </div>
                                             <a href='acquista.php?id=$id' class='btn btn-primary'>Acquista</a>

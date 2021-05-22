@@ -37,7 +37,7 @@ include 'validator/eseguiQuery.php';
                 <li><a href="visualizza.php">Visualizza i vestiti</a></li>
                 <?php
                 if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="#">Log utenti</a></li>');
+                    echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
 
@@ -169,12 +169,11 @@ include 'validator/eseguiQuery.php';
                                             </dl> <!-- item-property-hor .// -->");
                                                         ?>
                                                         <button type="submit" name="acquista-submit" style="background-color:#579558;" class=" btn btn-lg btn-primary text-uppercase">Compra ora</button>
-                                            </article> <!-- card-body.// -->
-                                        </aside> <!-- col.// -->
-                                    </div> <!-- row.// -->
-                                </div> <!-- card.// -->
+                                            </article>
+                                        </aside>
+                                    </div>
+                                </div>
                             </div>
-                            <!--container.//-->
                         </form>
     <?php
                     } else {

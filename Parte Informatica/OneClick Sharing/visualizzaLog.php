@@ -16,6 +16,7 @@ $table = getLogTable();
 if ($table == "null") {
     $table = "<h3>Non ci sono log, ritorna più tardi.</h3>";
 } else {
+    //Tabella disponibile, la stampo
     $table = $header . $table;
 }
 ?>
@@ -45,9 +46,8 @@ if ($table == "null") {
                 <li><a href="visualizza.php">Visualizza i vestiti</a></li>
 
                 <?php
-                if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
-                } else if (isset($_SESSION["loginC"])) {
+                //Visualizzo la sezione dona un vestito se l'utente è loggato
+                if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
                 }
                 ?>
@@ -77,7 +77,7 @@ if ($table == "null") {
             <br>
             <br>
             <div id="container2">
-                <table id= "tStyle">
+                <table id="tStyle">
                     <?php
                     echo $table;
                     ?>

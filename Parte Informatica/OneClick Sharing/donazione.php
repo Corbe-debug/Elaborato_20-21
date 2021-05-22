@@ -150,6 +150,7 @@ if (isset($_SESSION["loginC"])) {
                         <button type="submit" name="donazione" class="btn btn-primary btn-lg">Dona</button>
                         </div>');
 
+                    //Visualizzo errori
                     if (isset($_GET['error'])) {
                         switch ($_GET['error']) {
                             case 1:
