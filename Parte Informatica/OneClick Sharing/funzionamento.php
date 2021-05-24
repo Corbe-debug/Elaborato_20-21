@@ -25,7 +25,7 @@ include 'validator/eseguiQuery.php';
                 <li><a href="visualizza.php">Visualizza i vestiti</a></li>
                 <?php
                 if (isset($_SESSION["loginA"])) {
-                    echo ('<li><a href="#">Log utenti</a></li>');
+                    echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
                     echo ('<li><a href="donazione.php">Dona un vestito</a></li>');
 

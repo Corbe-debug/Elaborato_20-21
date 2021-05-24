@@ -1,3 +1,5 @@
+(CREAZIONE DATABASE)
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
@@ -32,15 +34,6 @@ CREATE TABLE `admin` (
   `Email` varchar(40) NOT NULL,
   `PSW` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Dump dei dati per la tabella `admin`
---
-
-INSERT INTO `admin` (`idA`, `Email`, `PSW`) VALUES
-(1, 'admin@admin.admin', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -174,3 +167,33 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(DONAZIONE VESTITO)
+
+INSERT INTO `vestito`(`Tipo`, `Marca`, `Taglia`, `Colore`, `Descrizione`, `Valutazione`, `Disponibile`, `PathImmagine`, `DataDonazione`, `DataAcquisto`, `idC1`, `idC2`) VALUES ('[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(VISUALIZZO LOG)
+
+SELECT * FROM Log
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(INSERISCO LOG)
+
+INSERT INTO `log`(`Descrizione`, `DataOra`, `idC1`) VALUES ('[value-2]','[value-3]','[value-4]')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+(REGISTRAZIONE CLIENTE)
+
+INSERT INTO `cliente`(`Nome`, `Cognome`, `DataNascita`, `Indirizzo`, `Stelle`, `Email`, `PSW`) VALUES ([value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]')
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+()

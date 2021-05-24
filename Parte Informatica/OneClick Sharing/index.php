@@ -28,6 +28,7 @@ include 'validator/eseguiQuery.php';
                 <li><a href="visualizza.php">Visualizza i vestiti</a></li>
 
                 <?php
+                //In base se il cliente o l'admin sono loggati visualizzo 2 link diversi
                 if (isset($_SESSION["loginA"])) {
                     echo ('<li><a href="visualizzaLog.php">Log utenti</a></li>');
                 } else if (isset($_SESSION["loginC"])) {
@@ -73,6 +74,7 @@ include 'validator/eseguiQuery.php';
     <center>
         <br>
         <?php
+        //In base se il cliente o l'admin sono loggati visualizzo messaggi diversi
         if (isset($_SESSION["loginA"])) {
             echo ("<h1 class='welcomeText'>Bentornato admin</h1>");
             echo ("<p class='welcomeText'>Visualizza i vestiti presenti oppure i log degli utenti</p>");
@@ -145,6 +147,7 @@ include 'validator/eseguiQuery.php';
     </center>
 
     <?php
+    //Visualizzo errori
     if (isset($_GET['error'])) {
         switch ($_GET['error']) {
             case 1:
@@ -160,6 +163,8 @@ include 'validator/eseguiQuery.php';
                 echo "<script>alert('Email non trovata')</script>";
                 break;
         }
+
+        //Visualizzo messaggi ok
     } else if (isset($_GET['ok'])) {
         switch ($_GET['ok']) {
             case 1:

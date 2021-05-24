@@ -125,6 +125,7 @@ session_start();
     </div>
 
     <?php
+    //Visualizzo errori
     if (isset($_GET['error'])) {
         switch ($_GET['error']) {
             case 1:
