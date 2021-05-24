@@ -33,6 +33,8 @@ CREATE TABLE `admin` (
   `PSW` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
 -- Dump dei dati per la tabella `admin`
 --
@@ -57,15 +59,6 @@ CREATE TABLE `cliente` (
   `PSW` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dump dei dati per la tabella `cliente`
---
-
-INSERT INTO `cliente` (`idC`, `Nome`, `Cognome`, `DataNascita`, `Indirizzo`, `Stelle`, `Email`, `PSW`) VALUES
-(0, 'DB', 'DB', 'DB', 'DB', 0, 'DB', 'DB'),
-(2, 'Nome1', 'Cognome1', '02/09/2001', 'Via1', 11, 'utente1@utente1.it', 'b88d6b04a9dc38860301f6bdd81e5ccd'),
-(3, 'Nome2', 'Cognome2', '10/01/2011', 'Via2', 9, 'utente2@utente2.it', 'f7a88d7c3168218b580aa68ab3030491');
-
 -- --------------------------------------------------------
 
 --
@@ -78,29 +71,6 @@ CREATE TABLE `log` (
   `DataOra` varchar(30) NOT NULL,
   `idC1` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `log`
---
-
-INSERT INTO `log` (`idL`, `Descrizione`, `DataOra`, `idC1`) VALUES
-(1, 'Un utente si è registrato', '21/05/2021 22:41:09', 2),
-(2, 'Un utente si è registrato', '21/05/2021 22:42:09', 3),
-(3, 'Un utente si è disconnesso', '21/05/2021 22:42:12', 3),
-(4, 'Un utente ha effettuato il login', '21/05/2021 22:42:22', 2),
-(5, 'Un utente ha donato un vestito con id: 1', '21/05/2021 22:43:06', 2),
-(6, 'Un utente ha effettuato il login', '21/05/2021 22:43:44', 3),
-(7, 'Un utente ha donato un vestito con id: 2', '21/05/2021 22:44:50', 3),
-(8, 'Un utente ha comprato un vestito con id:  1', '21/05/2021 22:45:04', 3),
-(9, 'Un utente ha effettuato il login', '21/05/2021 22:45:24', 2),
-(10, 'Un utente ha comprato un vestito con id:  2', '21/05/2021 22:45:33', 2),
-(11, 'Un utente ha donato un vestito con id: 3', '21/05/2021 22:46:27', 2),
-(12, 'Un utente si è disconnesso', '21/05/2021 22:46:38', 2),
-(13, 'Un utente ha effettuato il login', '21/05/2021 22:46:48', 3),
-(14, 'Un utente ha donato un vestito con id: 4', '21/05/2021 22:47:24', 3),
-(15, 'Un utente si è disconnesso', '21/05/2021 22:47:39', 3),
-(16, 'Un utente ha effettuato il login', '21/05/2021 22:48:11', 2),
-(17, 'Un utente si è disconnesso', '21/05/2021 22:48:13', 2);
 
 -- --------------------------------------------------------
 
@@ -123,16 +93,6 @@ CREATE TABLE `vestito` (
   `idC1` int(11) NOT NULL,
   `idC2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `vestito`
---
-
-INSERT INTO `vestito` (`idV`, `Tipo`, `Marca`, `Taglia`, `Colore`, `Descrizione`, `Valutazione`, `Disponibile`, `PathImmagine`, `DataDonazione`, `DataAcquisto`, `idC1`, `idC2`) VALUES
-(1, 'Felpa', 'Adidas', 'L', 'Bianca', 'Felpa tenuta bene', 3, 0, 'Foto1.jpg', '21/05/2021', '21/05/2021', 2, 3),
-(2, 'Cappello', 'Tommy Hilfiger', 'M', 'Blu', 'Cappello Tommy Hilfiger tenuto bene', 2, 0, 'Foto2.jpg', '21/05/2021', '21/05/2021', 3, 2),
-(3, 'Jeans', 'Levis', 'L', 'Color Jeans', 'In buono stato', 3, 1, 'Foto3.jpg', '21/05/2021', 'null', 2, 0),
-(4, 'Scarpe', 'Jordan', '41', 'Bianche, rosse e nere', 'Scarpe che sembrano nuove', 5, 1, 'Foto4.jpg', '21/05/2021', 'null', 3, 0);
 
 --
 -- Indici per le tabelle scaricate
